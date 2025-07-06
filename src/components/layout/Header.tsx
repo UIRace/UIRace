@@ -79,7 +79,11 @@ function Header() {
                   return (
                     <MenuLink
                       key={generateUniqueId("login-mobile-menu-link")}
-                      link={item.toLowerCase()}
+                      link={`/${
+                        item.toLowerCase() === "/home"
+                          ? "/"
+                          : item.toLowerCase()
+                      }`}
                       className={`${
                         pathname ===
                           (item === "Home" ? "/" : `/${item.toLowerCase()}`) &&
@@ -98,7 +102,11 @@ function Header() {
                     return (
                       <MenuLink
                         key={generateUniqueId("non-login-mobile-menu-link")}
-                        link={item.toLowerCase()}
+                        link={`/${
+                          item.toLowerCase() === "home"
+                            ? "/"
+                            : item.toLowerCase()
+                        }`}
                         className={`${
                           pathname ===
                             (item === "Home"

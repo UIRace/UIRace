@@ -8,7 +8,7 @@ type Props = {
   external?: boolean;
 };
 
-function PrimaryLink({
+function SecondaryLink({
   className = "",
   link,
   children,
@@ -17,7 +17,7 @@ function PrimaryLink({
   return (
     <Link
       href={`/${link}`}
-      className={`bg-primary flex items-center justify-center gap-3 text-wt-primary px-4 py-2 rounded-md font-semibold ${className}`}
+      className={`rounded-md px-4 py-2 font-semibold border dark:border-wt-primary/5 border-bt-primary/10 dark:bg-wt-primary/5 bg-wt-primary/10 dark:text-wt-primary text-bt-primary backdrop-blur-2xl ${className}`}
       target={external ? "_blank" : "_self"}
       rel={external ? "noopener noreferrer" : ""}
     >
@@ -26,4 +26,4 @@ function PrimaryLink({
   );
 }
 
-export default PrimaryLink;
+export default SecondaryLink;
