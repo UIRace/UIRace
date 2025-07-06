@@ -55,10 +55,8 @@ function Header() {
   if (!width) return null;
 
   return (
-    <div className="fixed top-0 backdrop-blur w-full">
-      <header
-        className={`max-w-7xl gap-4 z-10000 w-full mx-auto grid h-[72px]  px-5 py-4 grid-cols-[auto_1fr_auto]`}
-      >
+    <div className="fixed top-0 z-[10000] backdrop-blur w-full">
+      <header className="max-w-7xl gap-4 w-full mx-auto grid h-[72px] px-5 py-4 grid-cols-[auto_1fr_auto]">
         {width <= 915 && (
           <DropDown
             className="text-bt-primary dark:text-wt-primary"

@@ -7,4 +7,12 @@
   --color-wt-primary: #ffffff; /* white text primary */
   --color-bt-secondary: #495057; /* black text secondary */
   --color-wt-secondary: #ced4da; /* white text secondary */
+  --breakpoint-xxs: 380px; /* extra extra small devices (phones) */
+  --breakpoint-xs: 480px; /* extra small devices (phones) */
+  --breakpoint-sm: 640px; /* small devices (phones) */
+  --breakpoint-md: 768px; /* tablets */
+  --breakpoint-lg: 920px; /* tablets-laptops */
+  --breakpoint-lxg: 1024px; /* laptops */
+  --breakpoint-2xl: 1280px; /* desktops */
+  --breakpoint-3xl: 1536px; /* large screens */
 }
