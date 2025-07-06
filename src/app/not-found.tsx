@@ -13,9 +13,12 @@ function NotFound() {
       <p className="text-3xl font-extrabold mt-10 mb-10">Page not found</p>
       <SimpleCard className="text-center flex flex-col gap-3 text-sm">
         <p>
-          The page you're looking for seems to have wandered off the race track.
+          The page you&apos;re looking for seems to have wandered off the race
+          track.
         </p>
-        <p>Don't worry, even the best developers take wrong turns sometimes!</p>
+        <p>
+          Don&apos;t worry, even the best developers take wrong turns sometimes!
+        </p>
         <div className="flex gap-3 mt-5">
           <PrimaryLink link="" className="w-full">
             <IoHomeOutline />
