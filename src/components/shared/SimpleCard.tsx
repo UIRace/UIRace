@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function SimpleCard({
   children,
   className = "",
@@ -14,4 +16,4 @@ function SimpleCard({
   );
 }
 
-export default SimpleCard;
+export default memo(SimpleCard);

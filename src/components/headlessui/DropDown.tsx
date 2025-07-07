@@ -1,5 +1,6 @@
 "use client";
 import { Menu, MenuItems } from "@headlessui/react";
+import { memo } from "react";
 
 type AnchorProps =
   | "bottom end"
@@ -28,7 +29,7 @@ type Props = {
   className?: string;
 };
 
-export default function DropDown({
+function DropDown({
   children,
   width = "w-52",
   anchor = "bottom end",
@@ -50,3 +51,5 @@ export default function DropDown({
     </div>
   );
 }
+
+export default memo(DropDown);

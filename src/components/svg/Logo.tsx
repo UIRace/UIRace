@@ -1,4 +1,5 @@
-import * as React from "react";
+import React from "react";
+
 const Logo = ({
   height = 40,
   width = 40,
@@ -42,4 +43,4 @@ const Logo = ({
     </g>
   </svg>
 );
-export default Logo;
+export default React.memo(Logo);

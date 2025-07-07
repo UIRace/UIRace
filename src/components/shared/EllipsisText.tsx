@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function EllipsisText({
   children,
   className = "",
@@ -8,4 +10,4 @@ function EllipsisText({
   return <span className={`truncate block ${className}`}>{children}</span>;
 }
 
-export default EllipsisText;
+export default memo(EllipsisText);

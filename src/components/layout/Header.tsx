@@ -4,53 +4,26 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MdOutlineLightMode } from "react-icons/md";
 import { MdOutlineDarkMode } from "react-icons/md";
-import { useEffect, useState } from "react";
 import PrimaryLink from "@components/shared/PrimaryLink";
 import DropDown from "@components/headlessui/DropDown";
 import Separator from "@components/shared/Separator";
-import { FaRegUser } from "react-icons/fa";
-import { LuTrophy } from "react-icons/lu";
-import { CiSettings } from "react-icons/ci";
-import { RxExit } from "react-icons/rx";
-import MenuBtn from "@components/headlessui/MenuBtn";
 import MenuLink from "@components/headlessui/MenuLink";
 import { MenuButton } from "@headlessui/react";
-import EllipsisText from "@components/shared/EllipsisText";
 import useWidth from "@hooks/useWidth";
 import { IoMdMenu } from "react-icons/io";
-import generateUniqueId from "@/utils/generateUniqueId";
+import LoggedinMobileNavLinks from "@components/optimized/LoggedinMobileNavLinks";
+import LoggedoutMobileNavLinks from "@components/optimized/LoggedoutMobileNavLinks";
+import HeaderProfile from "@components/optimized/HeaderProfile";
+import LoggedoutNavLinks from "@components/optimized/LoggedoutNavLinks";
+import LoggedinNavLinks from "@components/optimized/LoggedinNavLinks";
+import { useUser } from "@/context/userContext";
+import { useTheme } from "@/context/changeTheme";
 
 function Header() {
-  const login = false;
+  const { isLoggedIn } = useUser();
+  const { theme, setThemeDark, setThemeLight } = useTheme();
   const width = useWidth();
   const pathname = usePathname();
-  const [theme, setTheme] = useState<"light" | "dark">(
-    typeof window !== "undefined"
-      ? (localStorage.theme as "light" | "dark") || "light"
-      : "light"
-  );
-
-  const handleTheme = () => {
-    if (localStorage.theme === "dark") {
-      localStorage.theme = "light";
-      document.documentElement.classList.remove("dark");
-      setTheme("light");
-    } else {
-      localStorage.theme = "dark";
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
-    }
-  };
-
-  useEffect(() => {
-    if (localStorage.theme === "dark") {
-      document.documentElement.classList.add("dark");
-      setTheme("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      setTheme("light");
-    }
-  }, []);
 
   if (!width) return null;
 
@@ -65,58 +38,13 @@ function Header() {
           >
             <div className="px-3 py-1.5">Navigation Links</div>
             <Separator />
-            {login ? (
+            {isLoggedIn ? (
               <>
-                {[
-                  "Home",
-                  "Dashboard",
-                  "Profile",
-                  "Challenges",
-                  "Leaderboard",
-                ].map((item) => {
-                  return (
-                    <MenuLink
-                      key={generateUniqueId("login-mobile-menu-link")}
-                      link={`/${
-                        item.toLowerCase() === "/home"
-                          ? "/"
-                          : item.toLowerCase()
-                      }`}
-                      className={`${
-                        pathname ===
-                          (item === "Home" ? "/" : `/${item.toLowerCase()}`) &&
-                        "text-primary"
-                      }`}
-                    >
-                      {item}
-                    </MenuLink>
-                  );
-                })}
+                <LoggedinMobileNavLinks pathname={pathname} />
               </>
             ) : (
               <>
-                {["Home", "Challenges", "Leaderboard", "About", "Contact"].map(
-                  (item) => {
-                    return (
-                      <MenuLink
-                        key={generateUniqueId("non-login-mobile-menu-link")}
-                        link={`/${
-                          item.toLowerCase() === "home"
-                            ? "/"
-                            : item.toLowerCase()
-                        }`}
-                        className={`${
-                          pathname ===
-                            (item === "Home"
-                              ? "/"
-                              : `/${item.toLowerCase()}`) && "text-primary"
-                        }`}
-                      >
-                        {item}
-                      </MenuLink>
-                    );
-                  }
-                )}
+                <LoggedoutMobileNavLinks pathname={pathname} />
                 {width <= 430 && (
                   <>
                     <Separator />
@@ -143,56 +71,10 @@ function Header() {
         </Link>
         {width > 915 && (
           <nav className="flex items-center justify-center gap-2 text-bt-primary dark:text-wt-primary">
-            {login ? (
-              <ul className="flex items-center justify-center gap-2">
-                {[
-                  "Home",
-                  "Dashboard",
-                  "Profile",
-                  "Challenges",
-                  "Leaderboard",
-                ].map((item) => {
-                  return (
-                    <li key={generateUniqueId("login-desktop-menu-link")}>
-                      <Link
-                        href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                        className={`px-3 py-1.5 ${
-                          pathname ===
-                            (item === "Home"
-                              ? "/"
-                              : `/${item.toLowerCase()}`) && "text-primary"
-                        } font-semibold`}
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
+            {isLoggedIn ? (
+              <LoggedinNavLinks pathname={pathname} />
             ) : (
-              <ul className="flex items-center justify-center gap-2">
-                {["Home", "Challenges", "Leaderboard", "About", "Contact"].map(
-                  (item) => {
-                    return (
-                      <li key={generateUniqueId("non-login-desktop-menu-link")}>
-                        <Link
-                          href={
-                            item === "Home" ? "/" : `/${item.toLowerCase()}`
-                          }
-                          className={`px-3 py-1.5 ${
-                            pathname ===
-                              (item === "Home"
-                                ? "/"
-                                : `/${item.toLowerCase()}`) && "text-primary"
-                          } font-semibold`}
-                        >
-                          {item}
-                        </Link>
-                      </li>
-                    );
-                  }
-                )}
-              </ul>
+              <LoggedoutNavLinks pathname={pathname} />
             )}
           </nav>
         )}
@@ -200,7 +82,7 @@ function Header() {
           <div className="flex items-center justify-center">
             <button
               className="px-4 py-2  font-semibold cursor-pointer text-xl"
-              onClick={handleTheme}
+              onClick={theme === "dark" ? setThemeLight : setThemeDark}
               type="button"
               aria-label="Toggle Dark Mode"
               title="Toggle Dark Mode"
@@ -212,37 +94,8 @@ function Header() {
               )}
             </button>
           </div>
-          {login ? (
-            <div>
-              <DropDown mainButton={<UserProfileButton />}>
-                <div className="px-3 py-0.5">
-                  <h3 className="font-semibold ">
-                    <EllipsisText>Sandeep Rajput</EllipsisText>
-                  </h3>
-                  <p className="text-sm/6 -mt-1 text-bt-secondary dark:text-wt-secondary">
-                    <EllipsisText>rajputsandeep@gmail.com</EllipsisText>
-                  </p>
-                </div>
-                <Separator />
-                <MenuLink link="/profile">
-                  <FaRegUser className="text-bt-secondary dark:text-wt-secondary" />
-                  <EllipsisText>Profile</EllipsisText>
-                </MenuLink>
-                <MenuLink link="/leaderboard">
-                  <LuTrophy className="text-bt-secondary dark:text-wt-secondary" />
-                  <EllipsisText>Leaderboard</EllipsisText>
-                </MenuLink>
-                <MenuLink link="/settings">
-                  <CiSettings className="text-bt-secondary dark:text-wt-secondary" />
-                  <EllipsisText>Settings</EllipsisText>
-                </MenuLink>
-                <Separator />
-                <MenuBtn handleClick={() => {}} title="Log out">
-                  <RxExit className="text-bt-secondary dark:text-wt-secondary" />
-                  <EllipsisText>Log out</EllipsisText>
-                </MenuBtn>
-              </DropDown>
-            </div>
+          {isLoggedIn ? (
+            <HeaderProfile />
           ) : (
             <div className="flex items-center gap-2">
               {width > 430 && (
@@ -250,7 +103,9 @@ function Header() {
                   Login
                 </Link>
               )}
-              <PrimaryLink link="register">Register</PrimaryLink>
+              <PrimaryLink title="Register to UI Race" link="register">
+                Register
+              </PrimaryLink>
             </div>
           )}
         </div>
@@ -260,21 +115,6 @@ function Header() {
 }
 
 export default Header;
-
-function UserProfileButton() {
-  return (
-    <div className="w-8 h-8 rounded-full overflow-hidden">
-      <MenuButton className={"cursor-pointer"}>
-        <img
-          src="https://avatars.githubusercontent.com/u/164610449?v=4"
-          alt="Sandeep Image"
-          draggable="false"
-          className="w-full h-full rounded-full object-cover scale-110"
-        />
-      </MenuButton>
-    </div>
-  );
-}
 
 function SideBarButton() {
   return (

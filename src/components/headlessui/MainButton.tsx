@@ -1,5 +1,6 @@
 "use client";
 import { MenuButton } from "@headlessui/react";
+import { memo } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -16,4 +17,4 @@ function MainButton({ children, className = "" }: Props) {
   );
 }
 
-export default MainButton;
+export default memo(MainButton);

@@ -1,6 +1,7 @@
 "use client";
 
 import { MenuItem } from "@headlessui/react";
+import { memo } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -25,4 +26,4 @@ function MenuBtn({ children, title, handleClick, className = "" }: Props) {
   );
 }
 
-export default MenuBtn;
+export default memo(MenuBtn);

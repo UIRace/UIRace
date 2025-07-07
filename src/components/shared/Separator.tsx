@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function Separator({ className = "" }: { className?: string }) {
   return (
     <div
@@ -6,4 +8,4 @@ function Separator({ className = "" }: { className?: string }) {
   );
 }
 
-export default Separator;
+export default memo(Separator);
