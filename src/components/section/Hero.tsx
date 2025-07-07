@@ -48,14 +48,16 @@ function Hero() {
           Challenges <FiArrowUpRight />
         </SecondaryLink>
       </div>
-      <div className="flex flex-col gap-5 mt-10 max-w-xl w-full xs:flex-row">
+      <div className="flex flex-col gap-5 sm:gap-5 xxs:gap-3 xxs:mt-12 justify-evenly mt-10 max-w-xl w-full xxs:flex-row">
         {analatyics.map((item, index) => (
           <div
             key={index}
             className="flex flex-col items-center gap-5  w-full justify-between"
           >
-            <p className="text-3xl font-bold text-primary">{item.value}</p>
-            <p className="text-sm text-bt-secondary dark:text-wt-secondary">
+            <p className="sm:text-3xl text-2xl font-bold text-primary">
+              {item.value}
+            </p>
+            <p className="xs:text-sm text-xs text-bt-secondary dark:text-wt-secondary">
               {item.title}
             </p>
           </div>
