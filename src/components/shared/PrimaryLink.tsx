@@ -19,7 +19,7 @@ function PrimaryLink({
 }: Props) {
   return (
     <Link
-      href={`/${link}`}
+      href={external ? link : `/${link}`}
       title={title || (children as string)}
       aria-label={title || (children as string)}
       className={`bg-primary flex items-center justify-center gap-3 text-wt-primary px-4 py-2 rounded-md font-semibold ${className}`}

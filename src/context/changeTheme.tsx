@@ -20,13 +20,17 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     if (!hasMounted) return;
 
     const storedTheme = localStorage.getItem("theme") as Theme | null;
+
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
 
     const resolvedTheme = storedTheme || (prefersDark ? "dark" : "light");
-
+    console.log();
     document.documentElement.classList.toggle("dark", resolvedTheme === "dark");
+    if (storedTheme === null) {
+      localStorage.setItem("theme", resolvedTheme);
+    }
     setTheme(resolvedTheme);
   }, [hasMounted]);
 

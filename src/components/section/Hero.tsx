@@ -41,7 +41,7 @@ function Hero() {
         submission at a time.
       </p>
       <div className="flex xxs:flex-row flex-col gap-3 mt-10 max-w-xl w-full">
-        <PrimaryLink link="/register" className="w-full !rounded-full">
+        <PrimaryLink link="register" className="w-full !rounded-full">
           Start Racing 🏁
         </PrimaryLink>
         <SecondaryLink

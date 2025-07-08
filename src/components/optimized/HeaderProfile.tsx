@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { RxExit } from "react-icons/rx";
 import { CiSettings } from "react-icons/ci";
 import { LuTrophy } from "react-icons/lu";
@@ -11,9 +11,21 @@ import MenuBtn from "@components/headlessui/MenuBtn";
 import { MenuButton } from "@headlessui/react";
 import { useUser } from "@/context/userContext";
 import Image from "next/image";
+import ConfirmationModal from "@components/shared/ConfirmationModal";
 
 function HeaderProfile() {
+  const [confirmLogoutModal, setConfirmLogoutModal] = useState<boolean>(false);
+
   const { logout } = useUser();
+
+  function handleConfirm() {
+    logout();
+  }
+
+  function handleCancel() {
+    setConfirmLogoutModal(false);
+  }
+
   return (
     <div>
       <DropDown mainButton={<UserProfileButton />}>
@@ -26,24 +38,39 @@ function HeaderProfile() {
           </p>
         </div>
         <Separator />
-        <MenuLink title="Profile" link="/profile">
+        <MenuLink title="Profile" link="profile">
           <FaRegUser className="text-bt-secondary dark:text-wt-secondary" />
           <EllipsisText>Profile</EllipsisText>
         </MenuLink>
-        <MenuLink title="Leaderboard" link="/leaderboard">
+        <MenuLink title="Leaderboard" link="leaderboard">
           <LuTrophy className="text-bt-secondary dark:text-wt-secondary" />
           <EllipsisText>Leaderboard</EllipsisText>
         </MenuLink>
-        <MenuLink title="Settings" link="/settings">
+        <MenuLink title="Settings" link="settings">
           <CiSettings className="text-bt-secondary dark:text-wt-secondary" />
           <EllipsisText>Settings</EllipsisText>
         </MenuLink>
         <Separator />
-        <MenuBtn handleClick={() => logout()} title="Log out">
+        <MenuBtn
+          handleClick={() => setConfirmLogoutModal(true)}
+          title="Log out"
+        >
           <RxExit className="text-bt-secondary dark:text-wt-secondary" />
           <EllipsisText>Log out</EllipsisText>
         </MenuBtn>
       </DropDown>
+      {confirmLogoutModal && (
+        <ConfirmationModal
+          heading="Logout Confirmation"
+          handleCancel={handleCancel}
+          danger={true}
+          handelConfirm={handleConfirm}
+        >
+          <p className="text-sm text-bt-secondary dark:text-wt-secondary">
+            Are you sure you want to log out?
+          </p>
+        </ConfirmationModal>
+      )}
     </div>
   );
 }

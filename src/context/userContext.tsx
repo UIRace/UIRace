@@ -20,12 +20,21 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const hasMounted = useHasMounted(); // safe check
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     if (hasMounted) {
-      const stored = localStorage.getItem("isLoggedIn") === "true";
-      setIsLoggedIn(stored);
+      const storedLoginStatus = localStorage.getItem("isLoggedIn");
+      if (storedLoginStatus === null) {
+        localStorage.setItem("isLoggedIn", "true");
+        setIsLoggedIn(true);
+        return;
+      }
+      if (storedLoginStatus === "true") {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
     }
   }, [hasMounted]);
 
