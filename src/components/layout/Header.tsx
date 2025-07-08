@@ -13,11 +13,24 @@ import useWidth from "@hooks/useWidth";
 import { IoMdMenu } from "react-icons/io";
 import LoggedinMobileNavLinks from "@components/optimized/LoggedinMobileNavLinks";
 import LoggedoutMobileNavLinks from "@components/optimized/LoggedoutMobileNavLinks";
-import HeaderProfile from "@components/optimized/HeaderProfile";
 import LoggedoutNavLinks from "@components/optimized/LoggedoutNavLinks";
 import LoggedinNavLinks from "@components/optimized/LoggedinNavLinks";
 import { useUser } from "@/context/userContext";
 import { useTheme } from "@/context/changeTheme";
+import dynamic from "next/dynamic";
+import LoadingCircle from "../shared/LoadingCircle";
+
+const HeaderProfile = dynamic(
+  () => import("@components/optimized/HeaderProfile"),
+  {
+    loading: () => (
+      <div>
+        <LoadingCircle className="w-8 h-8" />
+      </div>
+    ),
+    ssr: false,
+  }
+);
 
 function Header() {
   const { isLoggedIn } = useUser();

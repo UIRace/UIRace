@@ -30,12 +30,12 @@ function Hero() {
         🚀 Join 10,000+ developers racing to the top
       </SimpleCard>
 
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-center mt-10">
+      <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-center mt-10">
         <span className="bg-gradient-to-r bg-[200%_auto] bg-clip-text leading-tight text-transparent transition-all duration-300 from-neutral-900 via-slate-500 to-neutral-700 dark:from-neutral-100 dark:via-slate-400 dark:to-neutral-400">
           Frontend Race
         </span>
       </h2>
-      <p className="text-center text-sm max-w-xl mt-3 text-bt-secondary font-medium dark:text-wt-secondary">
+      <p className="text-center font-semibold max-w-xl mt-3 text-bt-secondary leading-6 dark:text-wt-secondary">
         Complete real-world UI challenges that sharpen your frontend ability,
         improve your problem-solving, and show what you can truly build — one
         submission at a time.
@@ -66,6 +66,9 @@ function Hero() {
             </p>
           </div>
         ))}
+      </div>
+      <div className="w-6 h-10 mt-16 border-2 border-bt-primary dark:border-wt-primary rounded-full flex justify-center animate-updown">
+        <div className="w-1 h-3 bg-bt-primary dark:bg-wt-primary rounded-full mt-2 animate-pulse"></div>
       </div>
     </section>
   );

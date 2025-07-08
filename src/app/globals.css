@@ -5,8 +5,8 @@
   --color-primary: #ff715c;
   --color-bt-primary: #262626; /* black text primary */
   --color-wt-primary: #ffffff; /* white text primary */
-  --color-bt-secondary: #495057; /* black text secondary */
-  --color-wt-secondary: #ced4da; /* white text secondary */
+  --color-bt-secondary: #666666; /* black text secondary */
+  --color-wt-secondary: #adb5bd; /* white text secondary */
   --color-warning: #f03e3e; /* warning */
 
   --breakpoint-xxs: 380px; /* extra extra small devices (phones) */
@@ -17,4 +17,46 @@
   --breakpoint-lxg: 1024px; /* laptops */
   --breakpoint-2xl: 1280px; /* desktops */
   --breakpoint-3xl: 1536px; /* large screens */
+
+  --animate-line-loader-800: line-loader-800 3s infinite linear;
+  --animate-line-loader-600: line-loader-600 3s infinite linear;
+  --animate-line-loader-400: line-loader-600 3s infinite linear;
+  --animate-updown: updown 1500ms infinite linear;
+
+  @keyframes updown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes line-loader-800 {
+    0% {
+      background-position: -800px 0;
+    }
+    100% {
+      background-position: 800px 0;
+    }
+  }
+  @keyframes line-loader-600 {
+    0% {
+      background-position: -600px 0;
+    }
+    100% {
+      background-position: 600px 0;
+    }
+  }
+  @keyframes line-loader-400 {
+    0% {
+      background-position: -400px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
 }
